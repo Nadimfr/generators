@@ -1,6 +1,6 @@
 import { getSession, signOut } from 'next-auth/react';
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Router from 'next/router';
 
 declare module 'next-auth' {
@@ -36,19 +36,28 @@ export async function Get(url: string) {
 
 // Post
 // data should be any since we dont know which data will be sent as an args
-export async function Post(url: string, data: any) {
+export async function Post(
+  url: string,
+  data: any,
+  headers?: Record<string, string>
+) {
   let response;
 
+  const config: AxiosRequestConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: '*/',
+    },
+  };
+
   try {
-    response = await axios.post(url ? `${url}` : ``, data, {});
+    response = await axios.post(url ? `${url}` : ``, data, config);
   } catch (error: any) {
     console.log('error', error.response);
-    handleCLientError(error);
   }
 
   return response;
 }
-
 // data should be any since we dont know which data will be sent as an args
 export async function Put(url: string, data: any) {
   let response;
