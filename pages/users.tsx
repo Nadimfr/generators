@@ -8,7 +8,7 @@ import { Post } from '../helpers/ApiConfig';
 
 type Props = {};
 
-const users = ({ data }: any) => {
+const Users = ({ data }: any) => {
   const [member, setMember] = useState({
     name: '',
     phone_number: '',
@@ -46,110 +46,105 @@ const users = ({ data }: any) => {
         <Table onDelete={(e) => deleteMember(e)} data={data} />
       </div>
 
-      <Model
-        children={
-          <>
-            <div className="font-bold underline uppercase text-lg">
-              Add Member
+      <Model open={open}>
+        <>
+          <div className="font-bold underline uppercase text-lg">
+            Add Member
+          </div>
+
+          <div className="w-full flex flex-wrap my-10">
+            <div className="flex items-center gap-5 w-1/3 my-5">
+              <div>Name</div>
+              <TextInput
+                placeholder="Enter Name"
+                value={member.name}
+                onChange={(e) => setMember({ ...member, name: e.target.value })}
+              />
             </div>
 
-            <div className="w-full flex flex-wrap my-10">
-              <div className="flex items-center gap-5 w-1/3 my-5">
-                <div>Name</div>
-                <TextInput
-                  placeholder="Enter Name"
-                  value={member.name}
-                  onChange={(e) =>
-                    setMember({ ...member, name: e.target.value })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center gap-5 w-1/3 my-5">
-                <div>Phone</div>
-                <TextInput
-                  placeholder="Enter Phone"
-                  value={member.phone_number}
-                  onChange={(e) =>
-                    setMember({ ...member, phone_number: e.target.value })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center gap-5 w-1/3 my-5">
-                <div>Amperage</div>
-                <select
-                  className="focus:outline-none"
-                  name="amperage"
-                  id="amperage"
-                  onChange={(e) =>
-                    setMember({ ...member, amperage: e.target.value })
-                  }
-                >
-                  <option selected disabled>
-                    Select
-                  </option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
-                </select>
-              </div>
-
-              <div className="flex items-center gap-5 w-1/3 my-5">
-                <div>Lebanese</div>
-                <select
-                  className="focus:outline-none"
-                  name="lebanese"
-                  id="lebanese"
-                  onChange={(e) =>
-                    setMember({
-                      ...member,
-                      lebanese: e.target.value == 'true' ? true : false,
-                    })
-                  }
-                >
-                  <option selected disabled>
-                    Select
-                  </option>
-                  <option value="true">True</option>
-                  <option value="false">False</option>
-                </select>
-              </div>
-
-              <div className="flex items-center gap-5 w-1/3 my-5">
-                <div>Old Counter</div>
-                <TextInput
-                  placeholder="Enter old counter"
-                  value={member.old_counter}
-                  onChange={(e) =>
-                    setMember({ ...member, old_counter: e.target.value })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center gap-5 w-1/3 my-5">
-                <div>Box Name</div>
-                <TextInput
-                  placeholder="Enter box name"
-                  value={member.box_name}
-                  onChange={(e) =>
-                    setMember({ ...member, box_name: e.target.value })
-                  }
-                />
-              </div>
+            <div className="flex items-center gap-5 w-1/3 my-5">
+              <div>Phone</div>
+              <TextInput
+                placeholder="Enter Phone"
+                value={member.phone_number}
+                onChange={(e) =>
+                  setMember({ ...member, phone_number: e.target.value })
+                }
+              />
             </div>
 
-            <Button title="Add User" onClick={addMember} />
-          </>
-        }
-        open={open}
-      />
+            <div className="flex items-center gap-5 w-1/3 my-5">
+              <div>Amperage</div>
+              <select
+                className="focus:outline-none"
+                name="amperage"
+                id="amperage"
+                onChange={(e) =>
+                  setMember({ ...member, amperage: e.target.value })
+                }
+              >
+                <option selected disabled>
+                  Select
+                </option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-5 w-1/3 my-5">
+              <div>Lebanese</div>
+              <select
+                className="focus:outline-none"
+                name="lebanese"
+                id="lebanese"
+                onChange={(e) =>
+                  setMember({
+                    ...member,
+                    lebanese: e.target.value == 'true' ? true : false,
+                  })
+                }
+              >
+                <option selected disabled>
+                  Select
+                </option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-5 w-1/3 my-5">
+              <div>Old Counter</div>
+              <TextInput
+                placeholder="Enter old counter"
+                value={member.old_counter}
+                onChange={(e) =>
+                  setMember({ ...member, old_counter: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="flex items-center gap-5 w-1/3 my-5">
+              <div>Box Name</div>
+              <TextInput
+                placeholder="Enter box name"
+                value={member.box_name}
+                onChange={(e) =>
+                  setMember({ ...member, box_name: e.target.value })
+                }
+              />
+            </div>
+          </div>
+
+          <Button title="Add User" onClick={addMember} />
+        </>
+      </Model>
     </>
   );
 };
 
-export default users;
+export default Users;
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(`${process.env.baseURL}`);

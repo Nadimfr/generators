@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import { Post, Put } from '../helpers/ApiConfig';
 
-const bills = ({ data }: any) => {
+const Bills = ({ data }: any) => {
   const [index, setIndex] = useState(0);
   const [newCounter, setNewCounter] = useState('0');
   const [member, setMember] = useState({
@@ -17,31 +17,31 @@ const bills = ({ data }: any) => {
     lebanese: data[index]?.lebanese,
   });
 
-  const updateMember = async (id: string) => {
-    console.log('Updating member with ID:', id);
-    console.log('Member data:', member);
+  // const updateMember = async (id: string) => {
+  //   console.log('Updating member with ID:', id);
+  //   console.log('Member data:', member);
 
-    // Ensure that newCounter is updated before calling updateMember
-    setMember((prevMember) => ({
-      ...prevMember,
-      old_counter: newCounter,
-    }));
+  //   // Ensure that newCounter is updated before calling updateMember
+  //   setMember((prevMember) => ({
+  //     ...prevMember,
+  //     old_counter: newCounter,
+  //   }));
 
-    const url = `${process.env.baseURL}/${id}`;
+  //   const url = `${process.env.baseURL}/${id}`;
 
-    try {
-      const response = await Post(url, await member);
-      console.log('Response:', response);
-    } catch (error) {
-      console.error('Error updating member:', error);
-    }
-  };
+  //   try {
+  //     const response = await Post(url, await member);
+  //     console.log('Response:', response);
+  //   } catch (error) {
+  //     console.error('Error updating member:', error);
+  //   }
+  // };
 
   useEffect(() => {}, [newCounter]);
 
-  useEffect(() => {
-    updateMember(data[index]._id);
-  }, [index, data, member.old_counter]);
+  // useEffect(() => {
+  //   updateMember(data[index]._id);
+  // }, [index, data, member.old_counter]);
 
   return (
     <>
@@ -113,7 +113,7 @@ const bills = ({ data }: any) => {
   );
 };
 
-export default bills;
+export default Bills;
 
 export async function getServerSideProps(context: any) {
   const res = await fetch(`${process.env.baseURL}`);
