@@ -42,6 +42,7 @@ const users = ({ data }: any) => {
           <Button onClick={() => setOpen(true)} title="Add Member" />
           <Button onClick={() => router.push('/bills')} title="Start Bills" />
         </div>
+        {/* @ts-ignore */}
         <Table onDelete={(e) => deleteMember(e)} data={data} />
       </div>
 

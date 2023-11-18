@@ -37,6 +37,7 @@ const Table = (props: Props) => {
           <div className="w-[14.285714%] text-center">{row.old_counter}</div>
           <div className="w-[14.285714%] flex justify-center items-center">
             <FaTrashCan
+              //  @ts-ignore
               onClick={() => props.onDelete(row._id)}
               className="cursor-pointer"
               color="#c70000"
